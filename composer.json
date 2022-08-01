@@ -1,0 +1,5 @@
+{
+    "name": "xcom-marketplace/client",
+    "type": "library",
+    "description": "Client for xcom MarketPlace"
+}
