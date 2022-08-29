@@ -152,7 +152,7 @@ class Offer
      */
     public function addAttribute(string $name, $value): void
     {
-        $this->attributes[] = [$name, $value];
+        $this->attributes[] = [$name => $value];
     }
 
     public function toArray(): array
