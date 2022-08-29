@@ -79,6 +79,11 @@ class Offer
      */
     protected $imageUrls;
 
+    /**
+     * @var array|null
+     */
+    protected $attributes;
+
     public function setId(string $id): void
     {
         $this->id = $id;
@@ -141,6 +146,15 @@ class Offer
         $this->imageUrls[] = $url;
     }
 
+    /**
+     * @param string $name
+     * @param string|int|float $value
+     */
+    public function addAttribute(string $name, $value): void
+    {
+        $this->attributes[] = [$name, $value];
+    }
+
     public function toArray(): array
     {
         $data = [
@@ -158,6 +172,7 @@ class Offer
             'availableProductCount' => $this->availableProductCount,
             'description' => $this->description,
             'images' => array_values(array_unique($this->imageUrls)),
+            'attributes' => $this->attributes
         ];
 
         return array_filter($data, static function ($value) {
