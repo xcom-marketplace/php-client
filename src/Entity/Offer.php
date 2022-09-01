@@ -164,16 +164,22 @@ class Offer
             'brand' => $this->brand,
             'model' => $this->model,
             'name' => $this->name,
-            'gtins' => array_values(array_unique($this->gtins)),
             'storeId' => $this->storeId,
             'price' => $this->price,
             'priceType' => $this->priceType === PriceType::RETAIL ? 'rozn' : 'opt',
             'currency' => $this->currency,
             'availableProductCount' => $this->availableProductCount,
             'description' => $this->description,
-            'images' => array_values(array_unique($this->imageUrls)),
             'attributes' => $this->attributes
         ];
+
+        if ($this->gtins) {
+            $data['gtins'] = array_values(array_unique($this->gtins));
+        }
+
+        if ($this->imageUrls) {
+            $data['images'] = array_values(array_unique($this->imageUrls));
+        }
 
         return array_filter($data, static function ($value) {
             return $value !== null;
