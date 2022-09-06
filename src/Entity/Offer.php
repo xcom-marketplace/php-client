@@ -148,11 +148,12 @@ class Offer
 
     /**
      * @param string $name
-     * @param string|int|float $value
+     * @param string|int|float|bool $value
+     * @param string|null $unit
      */
-    public function addAttribute(string $name, $value): void
+    public function addAttribute(string $name, $value, string $unit = null): void
     {
-        $this->attributes[] = [$name => $value];
+        $this->attributes[] = compact('name', 'value', 'unit');
     }
 
     public function toArray(): array
