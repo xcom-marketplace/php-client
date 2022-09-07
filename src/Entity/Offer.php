@@ -153,7 +153,9 @@ class Offer
      */
     public function addAttribute(string $name, $value, string $unit = null): void
     {
-        $this->attributes[] = compact('name', 'value', 'unit');
+        if ($value !== null && $value !== '') {
+            $this->attributes[] = compact('name', 'value', 'unit');
+        }
     }
 
     public function toArray(): array
