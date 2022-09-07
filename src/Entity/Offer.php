@@ -182,8 +182,6 @@ class Offer
             $data['images'] = array_values(array_unique($this->imageUrls));
         }
 
-        return array_filter($data, static function ($value) {
-            return $value !== null;
-        });
+        return $data;
     }
 }

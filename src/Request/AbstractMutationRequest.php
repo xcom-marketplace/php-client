@@ -6,6 +6,7 @@ namespace XcomMarketplace\Client\Request;
 
 use XcomMarketplace\Client\Contracts\InputInterface;
 use XcomMarketplace\Client\Contracts\RequestInterface;
+use XcomMarketplace\Client\Utils\Arr;
 
 /**
  * @author Vladimir Solovyov <vsolovyov@wattdev.ru>
@@ -34,7 +35,9 @@ abstract class AbstractMutationRequest implements RequestInterface
 
     public function getBody(): ?string
     {
-        return json_encode($this->input->toArray());
+        return json_encode(
+            Arr::whereNotEmpty($this->input->toArray())
+        );
     }
 
     abstract public function getPath(): string;
