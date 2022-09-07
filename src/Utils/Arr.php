@@ -11,15 +11,14 @@ final class Arr
 {
     public static function whereNotEmpty(array $array): array
     {
-        return array_filter($array, 'self::isNotEmpty');
-    }
-
-    private static function isNotEmpty($value): bool
-    {
-        if (is_array($value)) {
-            return (bool) array_filter($value, 'self::isNotEmpty');
+        foreach ($array as &$value) {
+            if (is_array($value) && $value) {
+                $value = self::whereNotEmpty($value);
+            }
         }
 
-        return $value !== null && $value !== '';
+        return array_filter($array, static function ($value) {
+            return $value !== null && $value !== '' && $value !== [];
+        });
     }
 }
