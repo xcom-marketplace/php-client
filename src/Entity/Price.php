@@ -24,11 +24,21 @@ class Price
      */
     protected $type;
 
-    public function __construct(int $amount, string $currency, int $type = PriceType::RETAIL)
-    {
+    /**
+     * @var \DateTimeInterface
+     */
+    protected $validUntil;
+
+    public function __construct(
+        int $amount,
+        string $currency,
+        int $type = PriceType::RETAIL,
+        \DateTimeInterface $validUntil = null
+    ) {
         $this->amount = $amount;
         $this->currency = $currency;
         $this->type = $type;
+        $this->validUntil = $validUntil;
     }
 
     public function getAmount(): int
@@ -44,5 +54,10 @@ class Price
     public function getType(): int
     {
         return $this->type;
+    }
+
+    public function getValidUntil(): ?\DateTimeInterface
+    {
+        return $this->validUntil;
     }
 }
