@@ -55,6 +55,11 @@ class Offer
     protected $priceType;
 
     /**
+     * @var \DateTimeInterface|null
+     */
+    protected $priceValidUntil;
+
+    /**
      * @var string|null
      */
     protected $currency;
@@ -123,6 +128,7 @@ class Offer
     {
         $this->price = $price->getAmount();
         $this->priceType = $price->getType();
+        $this->priceValidUntil = $price->getValidUntil();
         $this->currency = $price->getCurrency();
     }
 
@@ -175,6 +181,10 @@ class Offer
             'description' => $this->description,
             'attributes' => $this->attributes
         ];
+
+        if ($this->priceValidUntil) {
+            $data['priceValidUntil'] = $this->priceValidUntil->format(\DateTimeInterface::ATOM);
+        }
 
         if ($this->gtins) {
             $data['gtins'] = array_values(array_unique($this->gtins));
