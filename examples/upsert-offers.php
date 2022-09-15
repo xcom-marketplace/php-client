@@ -46,9 +46,6 @@ try {
      * @var UpsertOffersPayload $payload
      */
     $payload = $client->sendRequest($request);
-
-    echo 'Number of updated contents: ' . $payload->getUpdatedContentCount() . PHP_EOL;
-    echo 'Number of updated prices: ' . $payload->getUpdatedPriceCount();
 } catch (UnprocessableEntityException $e) {
     // Unprocessable Offer(s).
     // Response code = 422.
