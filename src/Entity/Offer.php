@@ -32,6 +32,11 @@ class Offer
     /**
      * @var string|null
      */
+    protected $vendorCode;
+
+    /**
+     * @var string|null
+     */
     protected $model;
 
     /**
@@ -109,6 +114,11 @@ class Offer
         $this->brand = $brand;
     }
 
+    public function setVendorCode(string $code): void
+    {
+        $this->vendorCode = $code;
+    }
+
     public function setModel(string $model): void
     {
         $this->model = $model;
@@ -171,6 +181,7 @@ class Offer
             'sku' => $this->sku,
             'url' => $this->url,
             'brand' => $this->brand,
+            'vendorCode' => $this->vendorCode,
             'model' => $this->model,
             'name' => $this->name,
             'storeId' => $this->storeId,
