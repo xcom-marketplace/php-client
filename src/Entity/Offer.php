@@ -169,6 +169,10 @@ class Offer
      */
     public function addAttribute(string $name, $value, string $unit = null): void
     {
+        if (is_string($value)) {
+            $value = trim($value);
+        }
+
         if ($value !== null && $value !== '') {
             $this->attributes[] = compact('name', 'value', 'unit');
         }
