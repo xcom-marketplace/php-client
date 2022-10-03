@@ -18,6 +18,10 @@ final class Arr
         }
 
         return array_filter($array, static function ($value) {
+            if (is_string($value)) {
+                $value = trim($value);
+            }
+
             return $value !== null && $value !== '' && $value !== [];
         });
     }
