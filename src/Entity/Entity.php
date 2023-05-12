@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace XcomMarketplace\Client\Entity;
 
+use XcomMarketplace\Client\ValueObject\Meta;
+
 /**
  * @author Vlad Alekseev <valekseev@wattdev.ru>
  */
@@ -25,7 +27,7 @@ class Entity
     protected $type;
 
     /**
-     * @var \stdClass
+     * @var Meta
      */
     protected $meta;
 
@@ -35,56 +37,34 @@ class Entity
         $this->type = $type;
     }
 
-    /**
-     * @return string
-     */
     public function getId(): string
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getLid(): ?string
     {
         return $this->lid;
     }
 
-    /**
-     * @param string|null $lid
-     * @return Entity
-     */
-    public function setLid(?string $lid): Entity
+    public function setLid(string $lid): void
     {
         $this->lid = $lid;
-        return $this;
     }
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return $this->type;
     }
 
-    /**
-     * @return \stdClass
-     */
-    public function getMeta(): \stdClass
+    public function getMeta(): Meta
     {
         return $this->meta;
     }
 
-    /**
-     * @param \stdClass $meta
-     * @return Entity
-     */
-    public function setMeta(\stdClass $meta): Entity
+    public function setMeta(Meta $meta): void
     {
         $this->meta = $meta;
-        return $this;
     }
 
 }

@@ -53,9 +53,12 @@ try {
 
     foreach ($entities as $entity) {
         $meta = $entity->getMeta();
-        if (isset($meta->status) && $meta->status === 422) {
+        if ($meta->get('status') === 422) {
             // Unprocessable Offer.
             // Status code = 422.
+            if ($errors = $meta->get('errors')) {
+                // Errors list of Offer
+            }
         }
     }
 } catch (UnprocessableEntityException $e) {
