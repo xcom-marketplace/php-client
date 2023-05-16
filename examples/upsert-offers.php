@@ -49,15 +49,14 @@ try {
      */
     $payload = $client->sendRequest($request);
 
-    $entities = $payload->getEntities();
-
-    foreach ($entities as $entity) {
+    foreach ($payload->getEntities() as $entity) {
         $meta = $entity->getMeta();
+        
         if ($meta->get('status') === 422) {
             // Unprocessable Offer.
             // Status code = 422.
             if ($errors = $meta->get('errors')) {
-                // Errors list of Offer
+                // Errors list for Offer.
             }
         }
     }
