@@ -15,7 +15,6 @@ use XcomMarketplace\Client\ValueObject\Meta;
  */
 final class UpsertOffersPayload implements ClientResponseInterface
 {
-
     /** @var Entity[] */
     private $entities;
 
@@ -31,7 +30,7 @@ final class UpsertOffersPayload implements ClientResponseInterface
 
     private function handleResponse(ResponseInterface $response)
     {
-        $document = json_decode((string)$response->getBody(), true);
+        $document = json_decode((string) $response->getBody(), true);
 
         if (!isset($document['data'])) {
             throw UnexpectedResponseException::createFromResponse($response);
@@ -41,14 +40,13 @@ final class UpsertOffersPayload implements ClientResponseInterface
 
     }
 
-    private function hydrate(array $rawEntities)
+    private function hydrate(array $resources)
     {
-        foreach ($rawEntities as $rawEntity) {
-            $entity = new Entity($rawEntity['id'], $rawEntity['type']);
+        foreach ($resources as $resource) {
+            $entity = new Entity($resource['id'], $resource['type']);
 
-            $entity->setLid($rawEntity['lid']);
-
-            $entity->setMeta(new Meta($rawEntity['meta']));
+            $entity->setLid($resource['lid']);
+            $entity->setMeta(new Meta($resource['meta']));
 
             $this->entities[] = $entity;
         }
