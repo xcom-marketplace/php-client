@@ -14,14 +14,14 @@ class Meta
      */
     protected $storage;
 
-    public function __construct(array $metaData)
+    public function __construct(array $metadata)
     {
-        $this->storage = $metaData;
+        $this->storage = $metadata;
     }
 
     public function get(string $key, $default = null)
     {
-        return $this->has($key) ? $this->storage[$key] : $default;
+        return array_key_exists($key, $this->storage) ? $this->storage[$key] : $default;
     }
 
     public function all(): array
@@ -31,11 +31,11 @@ class Meta
 
     public function has(string $key): bool
     {
-        return \array_key_exists($key, $this->storage);
+        return array_key_exists($key, $this->storage);
     }
 
     public function count(): int
     {
-        return \count($this->storage);
+        return count($this->storage);
     }
 }
