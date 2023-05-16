@@ -12,12 +12,12 @@ use XcomMarketplace\Client\ValueObject\Meta;
 class Entity
 {
     /**
-     * @var string
+     * @var string|null
      */
     protected $id;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $lid;
 
@@ -27,17 +27,23 @@ class Entity
     protected $type;
 
     /**
-     * @var Meta
+     * @var Meta|null
      */
     protected $meta;
 
-    public function __construct(string $id, string $type)
+    public function __construct(string $type, string $id = null, string $lid = null)
     {
-        $this->id = $id;
         $this->type = $type;
+        $this->id = $id;
+        $this->lid = $lid;
+    }
+    
+    public function getType(): string
+    {
+        return $this->type;
     }
 
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->id;
     }
@@ -47,17 +53,7 @@ class Entity
         return $this->lid;
     }
 
-    public function setLid(string $lid): void
-    {
-        $this->lid = $lid;
-    }
-
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    public function getMeta(): Meta
+    public function getMeta(): ?Meta
     {
         return $this->meta;
     }
@@ -66,5 +62,4 @@ class Entity
     {
         $this->meta = $meta;
     }
-
 }
