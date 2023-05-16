@@ -17,7 +17,7 @@ class Entity
     protected $id;
 
     /**
-     * @var string|null
+     * @var string
      */
     protected $lid;
 
