@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace XcomMarketplace\Client\Entity;
 
+use XcomMarketplace\Client\ValueObject\Price;
+use XcomMarketplace\Client\ValueObject\PriceType;
+
 /**
  * @author Vladimir Solovyov <vsolovyov@wattdev.ru>
  */

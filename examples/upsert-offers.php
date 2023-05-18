@@ -5,8 +5,6 @@ declare(strict_types=1);
 use XcomMarketplace\Client\Client;
 use XcomMarketplace\Client\Configuration;
 use XcomMarketplace\Client\Entity\Offer;
-use XcomMarketplace\Client\Entity\Price;
-use XcomMarketplace\Client\Entity\PriceType;
 use XcomMarketplace\Client\Exception\ClientException;
 use XcomMarketplace\Client\Exception\Exception;
 use XcomMarketplace\Client\Exception\ServerException;
@@ -15,6 +13,8 @@ use XcomMarketplace\Client\Exception\UnprocessableEntityException;
 use XcomMarketplace\Client\Input\UpsertOffersInput;
 use XcomMarketplace\Client\Request\UpsertOffersRequest;
 use XcomMarketplace\Client\Response\UpsertOffersPayload;
+use XcomMarketplace\Client\ValueObject\Price;
+use XcomMarketplace\Client\ValueObject\PriceType;
 
 $config = new Configuration('00000000-0000-0000-0000-000000000000');
 $client = new Client($config);
@@ -27,6 +27,7 @@ $price = new Price(2300000, 'RUB', PriceType::RETAIL);
 $offer->setId('286594');
 $offer->setUrl('https://seller.ru/product/286594');
 $offer->setPrice($price);
+$offer->setSku('CM8071504555318-SRL4W');
 
 $input->addOffer($offer);
 
@@ -36,6 +37,7 @@ $price = new Price(2000000, 'RUB', PriceType::WHOLESALE);
 $offer->setId('286595');
 $offer->setUrl('https://seller.ru/product/286595');
 $offer->setPrice($price);
+$offer->setSku('CM8071504555318-SRL4W');
 
 $input->addOffer($offer);
 
@@ -46,6 +48,18 @@ try {
      * @var UpsertOffersPayload $payload
      */
     $payload = $client->sendRequest($request);
+
+    foreach ($payload->getEntities() as $entity) {
+        $meta = $entity->getMeta();
+        
+        if ($meta->get('status') === 422) {
+            // Unprocessable Offer.
+            // Status code = 422.
+            if ($errors = $meta->get('errors')) {
+                // Errors list for Offer.
+            }
+        }
+    }
 } catch (UnprocessableEntityException $e) {
     // Unprocessable Offer(s).
     // Response code = 422.

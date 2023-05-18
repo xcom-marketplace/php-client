@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace XcomMarketplace\Client\Entity;
+namespace XcomMarketplace\Client\ValueObject;
 
 /**
  * @author Vladimir Solovyov <vsolovyov@wattdev.ru>
