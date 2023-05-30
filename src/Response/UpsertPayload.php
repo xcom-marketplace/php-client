@@ -13,7 +13,7 @@ use XcomMarketplace\Client\ValueObject\Meta;
 /**
  * @author Vladimir Solovyov <vsolovyov@wattdev.ru>
  */
-final class UpsertOffersPayload implements ClientResponseInterface
+final class UpsertPayload implements ClientResponseInterface
 {
     /** @var Entity[] */
     private $entities = [];
@@ -43,13 +43,13 @@ final class UpsertOffersPayload implements ClientResponseInterface
             if (!isset($resource['type'], $resource['meta']) || !isset($resource['id']) && !isset($resource['lid'])) {
                 return false;
             }
-            
+
             $entity = new Entity($resource['type'], $resource['id'] ?? null, $resource['lid'] ?? null);
             $entity->setMeta(new Meta($resource['meta']));
 
             $this->entities[] = $entity;
         }
-        
+
         return true;
     }
 }

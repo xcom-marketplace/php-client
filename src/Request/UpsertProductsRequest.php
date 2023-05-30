@@ -7,13 +7,13 @@ namespace XcomMarketplace\Client\Request;
 use XcomMarketplace\Client\Response\UpsertPayload;
 
 /**
- * @author Vladimir Solovyov <vsolovyov@wattdev.ru>
+ * @author Vlad Alekseev <valekseev@wattdev.ru>
  */
-final class UpsertOffersRequest extends AbstractMutationRequest
+final class UpsertProductsRequest extends AbstractMutationRequest
 {
     public function getPath(): string
     {
-        return '/offers';
+        return '/products';
     }
 
     public function getResponseClassName(): string

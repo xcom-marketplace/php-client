@@ -4,44 +4,31 @@ declare(strict_types=1);
 
 use XcomMarketplace\Client\Client;
 use XcomMarketplace\Client\Configuration;
-use XcomMarketplace\Client\Entity\Offer;
+use XcomMarketplace\Client\Entity\Product;
 use XcomMarketplace\Client\Exception\ClientException;
-use XcomMarketplace\Client\Exception\Exception;
 use XcomMarketplace\Client\Exception\ServerException;
 use XcomMarketplace\Client\Exception\TransportException;
 use XcomMarketplace\Client\Exception\UnprocessableEntityException;
-use XcomMarketplace\Client\Input\UpsertOffersInput;
-use XcomMarketplace\Client\Request\UpsertOffersRequest;
+use XcomMarketplace\Client\Input\UpsertProductsInput;
+use XcomMarketplace\Client\Request\UpsertProductsRequest;
 use XcomMarketplace\Client\Response\UpsertPayload;
-use XcomMarketplace\Client\ValueObject\Price;
-use XcomMarketplace\Client\ValueObject\PriceType;
+use XcomMarketplace\Client\ValueObject\ProductType;
+
 
 $config = new Configuration('00000000-0000-0000-0000-000000000000');
 $client = new Client($config);
 
-$input = new UpsertOffersInput();
+$input = new UpsertProductsInput();
 
-$offer = new Offer();
-$price = new Price(2300000, 'RUB', PriceType::RETAIL);
+$product = new Product();
+$product->setSku('CM8071504555318-SRL4W');
+$product->setBrand('Intel');
+$product->setName('Core i5-12400F OEM');
+$product->setType(ProductType::PHYSICAL);
 
-$offer->setId('286594');
-$offer->setUrl('https://seller.ru/product/286594');
-$offer->setPrice($price);
-$offer->setSku('CM8071504555318-SRL4W');
+$input->addProduct($product);
 
-$input->addOffer($offer);
-
-$offer = new Offer();
-$price = new Price(2000000, 'RUB', PriceType::WHOLESALE);
-
-$offer->setId('286595');
-$offer->setUrl('https://seller.ru/product/286595');
-$offer->setPrice($price);
-$offer->setSku('CM8071504555318-SRL4W');
-
-$input->addOffer($offer);
-
-$request = new UpsertOffersRequest($input);
+$request = new UpsertProductsRequest($input);
 
 try {
     /**
@@ -49,19 +36,21 @@ try {
      */
     $payload = $client->sendRequest($request);
 
+
     foreach ($payload->getEntities() as $entity) {
         $meta = $entity->getMeta();
 
         if ($meta->get('status') === 422) {
-            // Unprocessable Offer.
+            // Unprocessable Products.
             // Status code = 422.
             if ($errors = $meta->get('errors')) {
-                // Errors list for Offer.
+                // Errors list for Product.
             }
         }
     }
+
 } catch (UnprocessableEntityException $e) {
-    // Unprocessable Offer(s).
+    // Unprocessable Product(s).
     // Response code = 422.
     $errors = $e->getErrors();
 } catch (ClientException $e) {
@@ -77,3 +66,4 @@ try {
 } catch (Exception $e) {
     // Exception is ancestor the above exceptions. Useful for catching all library exceptions.
 }
+
