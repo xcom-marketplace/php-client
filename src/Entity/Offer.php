@@ -197,7 +197,7 @@ class Offer
             'currency' => $this->currency,
             'availableProductCount' => $this->availableProductCount,
             'description' => $this->description,
-            'attributes' => $this->attributes
+            'attributes' => $this->attributes,
         ];
 
         if ($this->priceValidUntil) {
