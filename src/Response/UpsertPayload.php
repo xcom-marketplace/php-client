@@ -13,7 +13,7 @@ use XcomMarketplace\Client\ValueObject\Meta;
 /**
  * @author Vladimir Solovyov <vsolovyov@wattdev.ru>
  */
-final class UpsertPayload implements ClientResponseInterface
+class UpsertPayload implements ClientResponseInterface
 {
     /** @var Entity[] */
     private $entities = [];
@@ -37,7 +37,7 @@ final class UpsertPayload implements ClientResponseInterface
         }
     }
 
-    private function hydrate(array $resources): bool
+    protected function hydrate(array $resources): bool
     {
         foreach ($resources as $resource) {
             if (!isset($resource['type'], $resource['meta']) || !isset($resource['id']) && !isset($resource['lid'])) {

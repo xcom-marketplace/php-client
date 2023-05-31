@@ -12,7 +12,7 @@ use XcomMarketplace\Client\Exception\TransportException;
 use XcomMarketplace\Client\Exception\UnprocessableEntityException;
 use XcomMarketplace\Client\Input\UpsertOffersInput;
 use XcomMarketplace\Client\Request\UpsertOffersRequest;
-use XcomMarketplace\Client\Response\UpsertPayload;
+use XcomMarketplace\Client\Response\UpsertOffersPayload;
 use XcomMarketplace\Client\ValueObject\Price;
 use XcomMarketplace\Client\ValueObject\PriceType;
 
@@ -45,7 +45,7 @@ $request = new UpsertOffersRequest($input);
 
 try {
     /**
-     * @var UpsertPayload $payload
+     * @var UpsertOffersPayload $payload
      */
     $payload = $client->sendRequest($request);
 

@@ -268,7 +268,7 @@ class Product
         ];
 
         if ($this->creationDate) {
-            $data['priceValidUntil'] = $this->creationDate->format(\DateTimeInterface::ATOM);
+            $data['creationDate'] = $this->creationDate->format(\DateTimeInterface::ATOM);
         }
 
         if ($this->gtins) {

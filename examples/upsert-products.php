@@ -11,7 +11,7 @@ use XcomMarketplace\Client\Exception\TransportException;
 use XcomMarketplace\Client\Exception\UnprocessableEntityException;
 use XcomMarketplace\Client\Input\UpsertProductsInput;
 use XcomMarketplace\Client\Request\UpsertProductsRequest;
-use XcomMarketplace\Client\Response\UpsertPayload;
+use XcomMarketplace\Client\Response\UpsertProductsPayload;
 use XcomMarketplace\Client\ValueObject\ProductType;
 
 
@@ -32,14 +32,12 @@ $request = new UpsertProductsRequest($input);
 
 try {
     /**
-     * @var UpsertPayload $payload
+     * @var UpsertProductsPayload $payload
      */
     $payload = $client->sendRequest($request);
 
-
     foreach ($payload->getEntities() as $entity) {
         $meta = $entity->getMeta();
-
         if ($meta->get('status') === 422) {
             // Unprocessable Products.
             // Status code = 422.

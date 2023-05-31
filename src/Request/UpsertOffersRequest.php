@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace XcomMarketplace\Client\Request;
 
-use XcomMarketplace\Client\Response\UpsertPayload;
+use XcomMarketplace\Client\Response\UpsertOffersPayload;
 
 /**
  * @author Vladimir Solovyov <vsolovyov@wattdev.ru>
@@ -18,6 +18,6 @@ final class UpsertOffersRequest extends AbstractMutationRequest
 
     public function getResponseClassName(): string
     {
-        return UpsertPayload::class;
+        return UpsertOffersPayload::class;
     }
 }
