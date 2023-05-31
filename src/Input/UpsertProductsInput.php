@@ -22,6 +22,16 @@ class UpsertProductsInput implements InputInterface
 
     public function toArray(): array
     {
-        return ['products' => $this->products];
+        $document = ['data' => []];
+
+        foreach ($this->products as $i => $product) {
+            $document['data'][] = [
+                'type' => 'products',
+                'lid' => (string) $i,
+                'attributes' => $product
+            ];
+        }
+        
+        return $document;
     }
 }
