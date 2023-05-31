@@ -44,7 +44,7 @@ class Product
     /**
      * @var string[]|null
      */
-    protected $gtins;
+    protected $gtin;
 
     /**
      * @var array|null
@@ -148,7 +148,7 @@ class Product
 
     public function addGtin(string $gtin): void
     {
-        $this->gtins[] = $gtin;
+        $this->gtin[] = $gtin;
     }
 
     /**
@@ -271,8 +271,8 @@ class Product
             $data['creationDate'] = $this->creationDate->format(\DateTimeInterface::ATOM);
         }
 
-        if ($this->gtins) {
-            $data['gtins'] = array_values(array_unique($this->gtins));
+        if ($this->gtin) {
+            $data['gtin'] = array_values(array_unique($this->gtin));
         }
 
         return $data;
